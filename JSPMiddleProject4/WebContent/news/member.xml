@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE member SYSTEM "member.dtd">
+
+<!--  dtd파일 올려놓고 XML파일 입력 시작!  
+	모든 TAG를 외울 수 없으므로 올려놓고 시작! CNTR+SPACE 사용 가능! 
+	
+	
+	
+   -->
+<!-- xml은 공개된 파일이 아니다. 각 업체마다 태그 이름과 속성이 다르다. 프로그램이 호환이 되도록만 만들어진 파일!
+	 xml파일은 문서가 어떻게 생겼는지만 알려주는 .. 역할!
+	 
+	 문서형 데이터 베이스 => 따라서 제약조건이 있다!
+	 
+	 태그명을 알아야 데이터를 읽어올 수 있다. 따라서, 업체에서는 어떤 태그가 있는지 정보를 넘겨줘야함 => ex)erd
+	 DTD : Document type definition 문서를 정의하는 언어? 문서 형식 정의하는 곳!
+	 여기서 tag 순서 지정!
+	 
+	 tag순서 유의!
+	 
+	 데이터타입 지정언어는 스키마(spring 사용! dtd확장용)사용!
+	
+	 myBatis / Spring 이미 동작하는 과정은 정해져있다.
+	  그 메뉴얼은 우리가 만든다! xml로 우리가 코딩하여 정의하면 spring이xml을 읽어서 동작!
+	 
+	 
+	
+ -->
+ 
+<member>
+	<list>
+		<no>1</no>
+		<name>홍길동</name>
+		<sex>남자</sex>
+		<address>서울</address>
+		<hp>010-1111-1111</hp>
+	</list>
+</member>

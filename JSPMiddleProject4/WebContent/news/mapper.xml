@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- 
+ myBatis로 DAO작성하는 법!! 앞으로 마이바티스로 DAO작성 예정!!
+ 
+ 
+ mapper라는 dtd파일을 올려놓음! => 그래야 등록된 tag를 사용가능!  
+ 
+ mapper 밑에 이 tag들이 올수있다. or 니까 이중에 하나를 사용해라 . *는 한번 이상씩 사용 가능! )+는 이중에 한개는 한번이상 사용해야!!
+ (cache-ref | cache | resultMap* | parameterMap* | sql* | insert* | update* | delete* | select*)+ -->
+ <mapper>
+ <!-- 이중에 한개를 써도 되고 안써도 되고! 사용한다면 이 순서대로! 단, 자바가 읽어가는 소스가 만들어져있기때문에 태크명을 맞춰야한다.
+ (include | trim | where | set | foreach | choose | if | bind)* 
+ 
+ 	name, sex, addr
+ 	SELECT name,sex,address FROM info ==> error 컬럼명이 다르므로! 
+ 	따라서 제공하는 tag 를 정확히 사용해야한다. dtd 올려놓고 제대로 사용!
+ 	tag명을 정확히 사용하면 myBatis 라이브러리에서 알아서 값을 넘겨줄 것임! xml을 읽어서!
+ 	Spring도 동일한 과정! 
+ 	
+ -->
+ 	<select id="" resultType="" parameterType=""> <!-- 반드시 입력해야 할 값은 id를 속성으로 준다! 
+ 						id는 반드시 작성을 해야한다! primary key! 반드시 다른 값으로 지정을 해야함! 
+ 						
+ 						예) table (caption?, tr+)
+ 							caption은 써도 되고 안써도 되고..
+ 					      	tr 은 여러번 써도 ok
+ 							 
+ 		각각의 속성에 어떤 값을 넣어야하는지 알고있어야한다.
+ 		id => 
+ 		resultType => 어떤  타입으로 값을 받을 건지, int, String or vo로 받을 건지 
+ 		parameterType => 어떤 타입의 값을 넣을지, ?에 적용할 값이 없으면 안써도 됨..  	
+ 						
+ 						-->
+ 		
+ 	</select>
+ 
+ </mapper>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	dtd 파일이란 -> xml 파일 정의하는 파일!  tag사용법 지정 파일! 
+	
+	<member>
+		<list>
+			<no></no>
+			<name></name>
+			<sex></sex>
+			<address></address>
+			<tel></tel>
+			<content></content>
+		</list>
+		
+		<list>
+			<no></no>
+			<name></name>
+			<sex></sex>
+			<address></address>
+			<tel></tel>
+			
+		</list>
+		
+		<list>
+			<no></no>
+			<name></name>
+			<sex></sex>
+			<address></address>
+			<hp></hp>
+			<content></content>
+		</list>
+	</member>
+	
+	이 형식을 만들 수 있게 형식을 줘야한다.=> dtd를 줘야한다. create table....
+	dtd파일은 xml파일을 작성하는데 기준이 되어 참조하는 파일! 여기에 맞게 코딩해~
+	따라서 dtd파일을 읽을 수만 있으면 ok!!
+	
+	
+	태그 선언
+	ELEMENT 태그
+	ATTRIBUTE 속성
+	
+	list: default(반드시 한번만 태그를 사용한다. ) => 아무것도 지정하지 않으면 => 반드시 한번은 사용해야함! 1
+	list+ : 반드시 한번 이상은 태그를 사용해야한다, 1 or 1+
+	list* : 0번이상은 사용해야한다(사용 or 사용x) 0,1,2,... 모두 사용!! 
+	? 	  : 사용할 수도 있고 사용하지 않을 수도 있다.  
+	|     : 선택을 나타냄! ~ 중 선택사용!
+	<!ELEMENT member (list)> ==> list를 한번만 쓰라는 말
+	<!ELEMENT member (list+)> ==> list를 한개 이상은 써야함! 여러개 써도 됨!
+	<!ELEMENT list (no, name, sex, address, (hp | tel), content?)>
+		list 다음에 이 순서대로 tag를 써라.. 순서대로! 나열! , 콤마 대로 순서임! > 
+		no, name, sex, address 디폴드로 무조건 있어야한다~
+		(hp| tel), 둘중에 하나 써라~
+		content? 써도 되고 안써도 되고
+		
+	#PCDATA :  tag사이에 문자열을 써라. <a>문자열</a>
+	
+	태그 안에 태그만 넌던지 :list tag안에는 아래 tag만 써야함
+	<!ELEMENT list (no, name, sex, address, (hp | tel), content?)>
+	
+	 or 태그 안에 문자열을 넣던지! no tag안에 문자열 들어옴
+	 <!ELEMENT no (#PCDATA)>
+	 
+	 table (caption?, tr+) tr에만 +가 되어있다 tr만 여러번 사용가능!
+	 table (caption?, tr)+ ()안에서는 +가 모두 적용이 됨! 모든  tag가 여러번 사용 가능!
+	 
+	<!ELEMENT no (#PCDATA)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT sex (#PCDATA)>
+	<!ELEMENT address (#PCDATA)>
+	<!ELEMENT hp (#PCDATA)>
+	<!ELEMENT tel (#PCDATA)>
+	<!ELEMENT content (#PCDATA)>
+
+	DTD파일 하나를 갖고 XML파일 만들어야한다.
+	
+
+
+ -->
+<!ELEMENT member (list+)>
+<!ELEMENT list (no, name, sex, address, (hp | tel), content?)>
+<!ELEMENT no (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT hp (#PCDATA)>
+<!ELEMENT tel (#PCDATA)>
+<!ELEMENT content (#PCDATA)>
