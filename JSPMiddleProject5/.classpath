@@ -11,7 +11,19 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/mybatis-3.2.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/asm-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/cglib-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/javassist-3.17.1-GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/log4j-api-2.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/log4j-core-2.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/slf4j-api-1.7.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/mybatis-3.2.8/mybatis-3.2.8/lib/slf4j-log4j12-1.7.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/standard-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist/Downloads/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
