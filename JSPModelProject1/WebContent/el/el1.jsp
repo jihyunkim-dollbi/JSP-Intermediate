@@ -33,7 +33,7 @@
     				***request 보내기 / 파일 1개에서 데이터 읽을때 
     				***session 보내기 / 여러 파일에서 데이터를 읽어야할때
     				
-    				Java(처리) / Html(JSP(request,response,session), SERVLET) 분리!!
+    				Java(처리) / Html(JSP(request,response,session etc(내장객체)), SERVLET) 분리!!
     				
     				
     				request => cookie, session 가져오기 가능!

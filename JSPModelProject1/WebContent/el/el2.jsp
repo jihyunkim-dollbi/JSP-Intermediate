@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%--
     
     	${연산자}
@@ -90,5 +91,15 @@
 	${"Hello" += 10 }<br>
 	${"hello" += "java" }<br>
 	${null+10 }<br>
+	
+	<!-- 
+	Hello
+	Hello
+	hello10
+	110
+	Hello10
+	hellojava
+	10
+	 -->
 </body>
 </html>
