@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	
+ Connection!부분! 
+ dtd가져오기! 
+ 
+ myBtis pdf 3페이지!!
+ 
+ <configuration>
+ <environments default="development">
+ <environment id="development">
+ <transactionManager type="JDBC"/>
+ <dataSource type="POOLED">
+ <property name="driver" value="${driver}"/>
+ <property name="url" value="${url}"/>
+ <property name="username" value="${username}"/>
+ <property name="password" value="${password}"/>
+ </dataSource>
+ </environment>
+ </environments>
+ <mappers>
+ <mapper resource="org/mybatis/example/BlogMapper.xml"/>
+ </mappers>
+</configuration>
+
+
+ -->
+ <!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <configuration>
+ <!-- 
+  (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, 
+ reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
+ 
+ ? 필요하면 쓰고 필요 없으면안써도 됨! => 쓰면 한번만 쓸 수 있음!
+ mappers 를 등록해야 그 안에 있는 것을 사용할 수 있다. => sql문장 저장
+ environments 오라클 연결 정보 
+ typeAliases 
+ 
+  -->
+ 	 <typeAliases>
+ 	 	<typeAlias type="com.sist.dao.BoardVO" alias="BoardVO"/><!-- vo등록하기  alias="BoardVO" 다음부터 이 이름으로 사용을 하겠다.-->
+ 	 </typeAliases>
+  	 <environments default="development"><!-- 환경설정:오라클 연결 정보  (environment)+ => 한번 이상은 사용해야함!=> 환경은 여러개 사용가능!오라클,myBatis, 마리아db등등.. -->
+  	 	<environment id="development"><!-- 개발환경 만들겠다!(transactionManager,dataSource) 두개를 모두 써야함! -->
+  	 		<transactionManager type="JDBC"></transactionManager><!--  트랜잭션: COMMIT, ROLLBACK -->
+  	 		<!-- UNPOOLED 
+  	 			 POOLED - DBCP  -->
+  	 		<dataSource type="POOLED"> 
+  	 		<!-- 오라클 정보 넣기 -->
+  	 		<!-- 
+  	 		
+  	 			PooledDataSource p=new PooledDataSource(); 메모리 생성
+  	 			p.setDriver(value)
+  	 			p.setUserName..... 
+  	 			
+  	 			모든 값을 받으면
+  	 			getConnection(p.getUrl(), p.getUserName(), p.getPassword()), disConnection() 기능 해줌..
+  	 			
+  	 		
+  	 		 -->
+  	 			<property name="driver" value="oracle.jdbc.driver.OracleDriver"/><!--  -->
+  	 			<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/><!--  -->
+  	 			<property name="username" value="hr"/><!--  -->
+  	 			<property name="password" value="happy"/><!--  -->
+  	 		</dataSource>
+  	 	</environment>
+  	 </environments> 
+  	 <!--  
+  	 
+  	 	<!ENTITY nbsp ' '>
+  	 	=> &nbsp; 
+  	 	
+  	 	<!ENTITY mapper 'board-mapper.xml'>
+  	 	=> &mapper; => include! 등록시킴! 
+  	 	
+  	  -->
+ 	 <mappers><!-- (mapper*, package*) mapper여러개 등록 가능! -->
+ 	 <!-- 분산시킴!!resource! 이 파일을 여기에 포함시켜라
+ 	 	mapper가 생성될때마다 여기에 등록하기!
+ 	 -->
+ 	 	<mapper resource="com/sist/dao/board-mapper.xml"/>
+ 	 </mappers>
+ </configuration>
+ 
+ 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 테이블 개수만큼 mapper를 따로 만들어야한다. except getconection,disco~(커넥션!) ==> config.xml(한개!)
+	
+	sql문장!기능 설정!
+	Mapper 안에는
+	PreparedStatment, ResultSet 기능! 
+	
+	
+-->
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.dao.board-mapper"><!-- namespace => package명시 -->
+<!--  (cache-ref | cache | resultMap* | parameterMap* | sql* | insert* | update* | delete* | select*)+ -->
+<!-- 
+	목록 읽어올때 => select!
+	public BoardVO boardListData(Map map)
+	
+	public int movieTotalPage()
+	resultType="int" parameterType="x-> 매개변수x"
+				리턴형				매개변수!
+	
+	
+	Map map=new Hashmap();
+	map.put("start",1)
+	map.put("end",10)
+	
+	ps.setInt(1, start);  ==  map.get("start")
+	ps.setInt(2, end);  ==  map.get("end")
+	
+	순서와 상관없이 key값을 매칭을 시켜주면된다.
+	#{start} == map.get("start")
+	 key명을 줘야한다. ?없다.
+	#{end}   == map.get("end")
+	
+	{} => 나온다는 것은 get메소드를 의미하는 것이다! 
+	
+	
+ -->
+ 	<!--  (include | trim | where | set | foreach | choose | if | bind)*  -->
+	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map"> <!-- resultType어디에 값을 넣을거니(리턴형)  alias="BoardVO" parameterType ? 매개변수=> 2개 but 가지고 있지 않은 변수도 있어?==> Map에 저장해!!-->
+		SELECT no,subject,name,regdate,hit,num
+		FROM(SELECT no,subject,name,regdate,hit,rownum as num
+		FROM(SELECT no,subject,name,regdate,hit
+		FROM board ORDER BY no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!--  public BoardVO boardDetailData(int no)
+	{		=> selectOne()	========> #{no} 일치시켜야함!
+				객체단위로 한개 받을때!
+	}
+          public List<BoardVO> boardDetailData(int no)
+			=> selectList()
+				 리스트로 받을때!
+	 -->
+	
+	<select id="boardDetailData" resultType="BoardVO" parameterType="int"><!--  *주면 알아서 자동으로 vo에 채워줄 것이다. 더이상set메소드 사용x -->
+		SELECT * FROM board
+		WHERE no=#{no}
+	</select>
+	
+	<!--  public void boardInsert (BoardVO vo)
+		{  리턴타입 없다. 
+		}
+	 -->
+	<!--<insert id="boardInsert" parameterType="BoardVO"></insert> -->
+	
+	<!-- public void boardUpdate(BoardVO vo) -->
+	<!--<update id="boardUpdate" parameterType="BoardVO"></update> -->
+	
+	<!-- public void boardDelete(int no) -->
+	<!--<delete id="boardDelete" parameterType="int"></delete> --> 
+	
+</mapper>
