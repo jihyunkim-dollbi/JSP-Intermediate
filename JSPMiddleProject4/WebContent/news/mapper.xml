@@ -21,7 +21,7 @@
  	Spring도 동일한 과정! 
  	
  -->
- 	<select id="" resultType="" parameterType=""> <!-- 반드시 입력해야 할 값은 id를 속성으로 준다! 
+ 	<select id="" resultType="vo" parameterType="Map"> <!-- 반드시 입력해야 할 값은 id를 속성으로 준다! 
  						id는 반드시 작성을 해야한다! primary key! 반드시 다른 값으로 지정을 해야함! 
  						
  						예) table (caption?, tr+)
@@ -30,11 +30,16 @@
  							 
  		각각의 속성에 어떤 값을 넣어야하는지 알고있어야한다.
  		id => 
- 		resultType => 어떤  타입으로 값을 받을 건지, int, String or vo로 받을 건지 
- 		parameterType => 어떤 타입의 값을 넣을지, ?에 적용할 값이 없으면 안써도 됨..  	
+ 		resultType => 어떤  타입으로 값을 받을 건지, int, String or vo로 받을 건지 (리턴타입) - select!에서만 사용! 
+ 		parameterType => 어떤 타입의 값을 넣을지, ?에 적용할 값이 없으면 안써도 됨.. (매개변수)
  						
+ 		속성은 반드시 한번만 사용! =>  String => vo  (여러개의 매개변수 넣을시에.. )			
+ 							 한개의 데이터 넣을때 - String,...etc..(일반데이터형), 
+ 							  두 개이상의 데이터가 들어갈때 =>1) vo, 2) Map(vo에 없는 변수를 넣을때) 
  						-->
- 		
+ 		SELECT a,b,c,d FROM board WHERE id=? AND pwd=?
+ 		WHERE num BETWEEN ? AND ?
  	</select>
- 
+ 	<insert id="" parameterType=""></insert>
+ 	<update id=""></update>
  </mapper>

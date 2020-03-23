@@ -1,1 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "app.dtd"> <!-- dtd 선언 -->
+<beans>
+	<bean class="com.sist.dao.BoardDAO" id="dao" test="A"/>
+	<bean class="com.sist.dao.BoardDAO" id="mdao"/>
+</beans>
+
+
+

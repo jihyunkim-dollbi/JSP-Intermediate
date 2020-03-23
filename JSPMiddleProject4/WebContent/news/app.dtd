@@ -4,8 +4,58 @@
     1. 구조파악! annotation, xml을 사용!
     2. 동작파악! 이미 라이브러리에서 동작과 순서를 모두 제공하기 때문에 알기 어렵다! 
     		   따라서, 어떻게 동작이 되는지 검색 고고!
-    		   
-    		   
+    
+    <beans>
+		<bean id="a" class="" jsp="" test="A"/>
+		<bean id="b" class="" test="A"/>
+		<bean id="c" class="" jsp="" test="A"/>
+		<bean id="d" class="" test="A"/>
+		<bean id="e" class="" test="B"/> ==> EMPTY TAG 자체에서 닫기 
+    </beans>
+    
+    1)		   
+	<태그>
+		<태그><태그> <!ELEMENT 태그(태그명)>
+	</태그>
 
+	2)
+	<태그> 문자열  </태그> <!ELEMENT 태그(#PCDATA)>
+
+	3)
+	<태그/> => <!ELEMENT 태그 EMPTY> =>값(속성)이 안에 들어감!
+		<img src=""/>
+
+	속성
+	ID  => UNIQUE => ID는 중복이 되면 안된다.
+	CDATA => 문자열(공백허용)
+	NOTATION => 문자열(공백허용X)
+	
+	<a href="/a.jsp" class="btn btn-sm btn-primary">
+		href는 notation class는 CDATA
+	IDREF => 참조! (등록된 ID만 들어올수 있다.)
+	REFS
+	
+	id   , ID
+	속성명 , 옵션 
+	
+	옵션
+		#REQUIRED : NOT NULL  (ID #REQUIRED => PRIMARY KEY) 반드시 기입해야하는 값!
+		#IMPLIED : NULL 허용! 속성명을 필요하면 쓰고 안써도 된다(ex width, height,...)
+		#FIXED : 디폴트로 속성값 정의, 사용안해도 지정된 값을 자동으로 읽음? 
+	
 
 -->
+
+<!ELEMENT beans (bean+)> <!-- 가장 최상위 tag beans 안에  tag bean을 여러개 사용 가능!-->
+<!ELEMENT bean EMPTY> <!-- bean tag안에 속성과 값을 넣는 형식 -->
+<!--bean tag 안에 속성 정의하기 -->
+<!ATTLIST bean id ID #REQUIRED 
+				class CDATA #REQUIRED
+				jsp CDATA #IMPLIED
+				test CDATA #FIXED 'A'>
+
+
+
+
+
+
