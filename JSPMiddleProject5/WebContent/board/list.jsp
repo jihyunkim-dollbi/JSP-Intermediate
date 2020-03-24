@@ -13,9 +13,7 @@
 	// request값 받기!
 	BoardModel model=new BoardModel(); // 1.
 	model.boardListData(request); // 2. 나중에 컨트롤러가 할 작업(1~2)
-	
-	
-	
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

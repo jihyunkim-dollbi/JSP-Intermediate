@@ -109,7 +109,12 @@
 	
 	
 	<!-- public void boardUpdate(BoardVO vo) -->
-	<!--<update id="boardUpdate" parameterType="BoardVO"></update> -->
+	<!-- 아래에서 정의하는 항복들은 업데이트 하였을 경우 아래 내용만 db에 업데이트 하라는 것이고 출력하라는 것이 아니다! -->
+	<update id="boardUpdate" parameterType="BoardVO">
+	 UPDATE board SET
+	 name=#{name}, subject=#{subject}, content=#{content}
+	 <include refid="where-no"/>
+	</update>
 	
 	
 	<!-- public void boardDelete(int no) -->

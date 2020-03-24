@@ -31,6 +31,7 @@ import com.sist.dao.*;
 
 public class BoardModel {
 
+	
 	public void boardListData(HttpServletRequest request)
 	{
 		String page=request.getParameter("page");
@@ -120,7 +121,7 @@ public class BoardModel {
 		String subject=request.getParameter("subject");  // setproperty 없다!
 		String content=request.getParameter("content");
 		String pwd=request.getParameter("pwd");
-		
+		// (#{no},#{name},#{subject},#{content},#{pwd},SYSDATE,0)
 		BoardVO vo=new BoardVO();
 		
 		vo.setName(name);
@@ -144,6 +145,69 @@ public class BoardModel {
 		
 	}
 	
+	
+	public void boardUpdateData(HttpServletRequest request)
+	{
+		
+	
+			String no=request.getParameter("no");
+			
+			BoardVO vo=BoardDAO.boardUpdateData(Integer.parseInt(no));
+			
+			request.setAttribute("vo", vo);
+
+	}
+	
+	
+	public void boardUpdate(HttpServletRequest request, HttpServletResponse response)
+	{
+		
+		
+		try{
+			
+			
+			//request에 값을 담을 수 있는 이유는 JSP에 doget, dopost 에서 request와 response를 매개변수로 하는 메소드를 갖고 있기때문에
+			//자바에서도 request와 response를 매개변수로 사용 가능하다!
+			//JSP파일에서 사용자가 입력한 값을 HttpServletRequest request, HttpServletResponse response) 
+			//위의 request와 response를 통해 받는다!
+			
+			request.setCharacterEncoding("UTF-8");
+		
+		
+			//request에 담긴 no, name, subject, content 값들(사용자가 입력한 값)을 각각의 변수에 다시 담는다.
+			
+			String no=request.getParameter("no"); //
+			String name=request.getParameter("name");
+			String subject=request.getParameter("subject");
+			String content=request.getParameter("content");
+			String pwd=request.getParameter("pwd");
+			
+			BoardVO vo= new BoardVO();
+			
+			
+			//위에서 담은 값들을 다시 vo객체에 담는다.
+			vo.setNo(Integer.parseInt(no));
+			vo.setName(name);
+			vo.setSubject(subject);
+			vo.setContent(content);
+			vo.setPwd(pwd);
+			
+			
+			//위에서 새로운 값을 담은 vo를 boardUpdate()를 이용해 mapper에서 sql문장을수행하도록 한다! 
+			BoardDAO.boardUpdate(vo);
+			
+			//request.setAttribute("vo", vo);
+			
+			//화면이동이 맞다!! 수정한 내용을 토대로 새로운 내용을 출력하는 새로운 화면으로 이동하므로!!
+			response.sendRedirect("detail.jsp?no="+no);
+			
+			
+			
+		}catch(Exception ex) {}
+		
+		
+		
+	}
 	
 	
 }

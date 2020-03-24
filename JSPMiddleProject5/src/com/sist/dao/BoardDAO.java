@@ -80,11 +80,12 @@ public class BoardDAO {
 	//가장 먼저 xml을 읽어놓고 시작해야 하기 때문에! xml 파싱작업이 가장 먼저 이루어져야한다.
 	private static SqlSessionFactory ssf;
 	
-	static
+	static // what is this?
 	{
 		//파싱하기 => 하는 이유: getConnection(), disConnection()만들어놓고 시작해야함
 		//id, sql문장을 Map에 저장해놓고 시작
 		//id를 입력하고 sql문장을 실행 결과를 달라고 해야하기 때문에!
+		
 		/*
 		 * <select id="boardDetailData" resultType="BoardVO" parameterType="int"><!--  *주면 알아서 자동으로 vo에 채워줄 것이다. 더이상set메소드 사용x -->
 				SELECT * FROM board
@@ -102,18 +103,11 @@ public class BoardDAO {
 		 * Map map = new HashMap();'
 		   map.put("boardDetailData","SELECT * FROM board WHERE no=#{no}")
 		 * 
-		 * 
-		 * ==> 필요한 데이터를 가져오는데 이것이...xml로 되어있다....
-		 * 
+		 * ==> 필요한 데이터를 가져오는데 이것이...xml로 되어있다.... 
 		 * 
 		 * 파싱한다는 것은 필요한 데이터를 저장해놓고 시작한다는 의미!
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
+
 		 */
-		
 		try{
 			
 			//xml파일 읽기
@@ -139,22 +133,16 @@ public class BoardDAO {
 			//빌드까지 끝! 목록읽기로 고고!
 			
 			
+		}catch(Exception ex){
 			
-			
-			
-			
-			
-			
-			
-		}catch(Exception ex)
-		{
 			System.out.println(ex.getMessage());
 		}
-		
+
 		//실무에서는 myBatis와 Spring을 갖고 업무! + ajax, js, 프론트...etc....
-		
-		
+	
 	}
+
+	
 	//목록읽기
 	public static List<BoardVO> boardListData(Map map) //메모리할당 안하려static추가
 	{
@@ -232,6 +220,7 @@ public class BoardDAO {
 		
 		//connection 반환해야한다
 		session.close(); //반환!
+		
 		return total;
 		
 	}
@@ -248,6 +237,39 @@ public class BoardDAO {
 		
 		
 	}
+	
+	
+	
+	public static BoardVO boardUpdateData(int no){//메모리할당 안하려static추가
+		
+		BoardVO vo=new BoardVO();
+		
+		SqlSession session=ssf.openSession(); //세션 생성
+		
+		
+		vo=session.selectOne("boardDetailData", no); // 데이터 가져오고
+		
+		session.close(); //반환!
+		
+		return vo; //데이터 리턴!
+		
+	}
+	
+	
+	
+	public static void boardUpdate(BoardVO vo)
+	
+	{
+		
+				
+		SqlSession session=ssf.openSession(true); // setAutoCommit(true)
+
+		session.update("boardUpdate",vo);
+		
+		session.close(); //반환!
+				
+	}
+	
 	
 	
 }
