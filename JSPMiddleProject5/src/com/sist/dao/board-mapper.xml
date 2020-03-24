@@ -35,6 +35,9 @@
 	
 	{} => 나온다는 것은 get메소드를 의미하는 것이다! 
 	
+	Map map = new HashMap();'
+	map.put("boardDetailData","SELECT * FROM board WHERE no=#{no}")
+	
 	
  -->
  	<!--  (include | trim | where | set | foreach | choose | if | bind)*  -->
@@ -54,11 +57,20 @@
 			=> selectList()
 				 리스트로 받을때!
 	 -->
+	 <sql id="where-no"><!-- no가 반복될때 반복제거 시킴 sql에 중복코딩 갖다놓고 불러서 씀 include refid="where-no"-->
+	 WHERE no=#{no}
+	 </sql>
 	
 	<select id="boardDetailData" resultType="BoardVO" parameterType="int"><!--  *주면 알아서 자동으로 vo에 채워줄 것이다. 더이상set메소드 사용x -->
 		SELECT * FROM board
-		WHERE no=#{no}
+		<include refid="where-no"/>
 	</select>
+	
+	<update id="hitIncrement" parameterType="int"><!-- 한 태그당 한개의 sql 문장만 수행! 각 태그에 sql문장 기입하기! -->
+		UPDATE board SET
+		hit=hit+1
+		<include refid="where-no"/>
+	</update>
 	
 	<!--  public void boardInsert (BoardVO vo)
 		{  리턴타입 없다. 
@@ -68,6 +80,7 @@
 	
 	<!-- public void boardUpdate(BoardVO vo) -->
 	<!--<update id="boardUpdate" parameterType="BoardVO"></update> -->
+	
 	
 	<!-- public void boardDelete(int no) -->
 	<!--<delete id="boardDelete" parameterType="int"></delete> --> 
