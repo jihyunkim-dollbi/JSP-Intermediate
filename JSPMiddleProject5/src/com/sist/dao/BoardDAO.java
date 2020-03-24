@@ -156,7 +156,7 @@ public class BoardDAO {
 		
 	}
 	//목록읽기
-	public List<BoardVO> boardListData(Map map)
+	public static List<BoardVO> boardListData(Map map) //메모리할당 안하려static추가
 	{
 		List<BoardVO> list=new ArrayList<BoardVO>();
 		
@@ -167,6 +167,9 @@ public class BoardDAO {
 		//							id값과 매치		parametertype과 매치 되야함!
 		// <select id="boardListData" resultType="BoardVO" parameterType="java.util.Map">
 		
+		
+		//connection 반환해야한다
+		session.close(); //반환!
 
 		return list;
 		
@@ -181,7 +184,7 @@ public class BoardDAO {
 	
 	
 	//상세보기
-	public BoardVO boardDetailData(int no){
+	public static BoardVO boardDetailData(int no){//메모리할당 안하려static추가
 		
 		BoardVO vo=new BoardVO();
 		
@@ -194,9 +197,42 @@ public class BoardDAO {
 		 * selectOne() - 클래스 한개 받기 
 		 */
 		
+		//현재 hit +1 이 되었는데!!
+		// 커밋을 안해서 조회수가 증가가 안되었다! .update는 커밋설정이 안되어있다! 
+		// 중요한 과정!!!!
+		//1.insert, update, delete 사용시 커밋을 처리해줘야함!!
+		//2. connection pool이기 때문에 반환작업을 해줘야한다!!
+		
+		session.commit();
+		
+		
 		vo=session.selectOne("boardDetailData", no); // 데이터 가져오고
 		
+		//connection 반환해야한다. 8개의 커넥션을 그때그때 사용하고 반환을 해놓아야한다. 커넥션을 다 쓰면 동작x , 커넥션은 세션안에 들어가 있기 때문에 session에서 close()!!
+		session.close(); //반환!
+		/*
+		 * 아래와 같은 작업!
+		 * if(ps!=null) ps.close();
+			if(conn!=null) conn.close();
+		 */
 		return vo; //데이터 리턴!
+		
+	}
+	
+	
+	//총페이지 구하기
+	public static int boardTotalPage()
+	{
+		
+		int total=0;
+		
+		SqlSession session = ssf.openSession();
+		total=session.selectOne("boardTotalPage");
+		
+		
+		//connection 반환해야한다
+		session.close(); //반환!
+		return total;
 		
 	}
 }

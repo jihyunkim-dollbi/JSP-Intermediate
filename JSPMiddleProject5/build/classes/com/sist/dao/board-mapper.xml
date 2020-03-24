@@ -57,6 +57,11 @@
 			=> selectList()
 				 리스트로 받을때!
 	 -->
+	 <select id="boardTotalPage" resultType="int"> <!-- 작업을 나눠서 세분화 하여 작업  -->
+	 	SELECT CEIL(COUNT(*)/10.0) FROM board	 
+	 </select>
+	 
+	 
 	 <sql id="where-no"><!-- no가 반복될때 반복제거 시킴 sql에 중복코딩 갖다놓고 불러서 씀 include refid="where-no"-->
 	 WHERE no=#{no}
 	 </sql>
@@ -76,7 +81,22 @@
 		{  리턴타입 없다. 
 		}
 	 -->
-	<!--<insert id="boardInsert" parameterType="BoardVO"></insert> -->
+	<insert id="boardInsert" parameterType="BoardVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE"> <!-- selectkey no처리먼저 아래처럼 nvl처리 해주고 insert처리해라!!  before준 이유는 selectkey를 실행하고 insert를 수행하라는 의미"order" -->
+		SELECT NVL(MAX(no)+1,1) as no FROM board 
+		</selectKey>
+	</insert>
+	<!-- 
+		alias? 명을 동일하게 맞춰줘야한다.
+		alias : alias의 사전적 의미로는 '가명', '별명'이라는 뜻을 갖고 있다. 본래 이름 대신에 사용 한다는 뜻이다.
+		
+		keyProperty="no"  ==동일 as no
+		rs.getInt(1) ==> rs.getInt("column명")
+	
+	 -->
+	
+	
+	
 	
 	<!-- public void boardUpdate(BoardVO vo) -->
 	<!--<update id="boardUpdate" parameterType="BoardVO"></update> -->
