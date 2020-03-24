@@ -1,11 +1,15 @@
 package com.sist.model;
 
+//아래 2줄 다시 정의하기!!
 //자바코딩은 boardModel에서 메소드형식만 만들어서 메소드를 호출하여 req,res값을 JSP에 넘겨받고 주고 받게끔만 만들어주고 
 //실제 sql문장으로 insert,select, update 를 명령/db작업하는 부분은 board-mapper에서 한다! 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
+
+import java.text.SimpleDateFormat;
 import java.util.*;
 import com.sist.dao.*;
 /*
@@ -52,13 +56,24 @@ public class BoardModel {
 		int totalpage=BoardDAO.boardTotalPage();
 		
 		
+		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		/*
+		 * 위의 한줄과 아래 3줄 코딩이 돌일한 코딩! 
+		 * SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+		 * 					===	  ================================= > 동일!!
+		 * 
+		 * Date date= new date();
+		 * String today = sdf.format(date);
+		 	
+		 */
+		
 		//jsp로 결과값 전송
 		//3개 
 		// jsp는 받은 값을 출력만 하는 기능!
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
-
+		request.setAttribute("today", today);
 
 	}
 	
@@ -95,16 +110,34 @@ public class BoardModel {
 		 * 따라서 입력창/화면 에서는 db작업을 할 필요x 
 		 * 입력창/화면창_ok.jsp에서 db작업!
 		 * 
-		 * 
-		 * 
 		 */
 		try{
+		
+			
+		request.setCharacterEncoding("UTF-8");
+		
+		String name=request.getParameter("name");
+		String subject=request.getParameter("subject");  // setproperty 없다!
+		String content=request.getParameter("content");
+		String pwd=request.getParameter("pwd");
+		
+		BoardVO vo=new BoardVO();
+		
+		vo.setName(name);
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setPwd(pwd);
+		
+		BoardDAO.boardInsert(vo);
+		
 		
 		response.sendRedirect("list.jsp");  // list 페이지로 이동!!
 		//에러난다 try~ catch 해줘야
 		//sendRedirect가 io exception을 갖고 있기 때문에.
 		
 		// 이 작업 후 ==> board-mapper에서 sql문장 insert작업하러 고고!!
+		
+		
 		
 		}catch(Exception ex) {}
 		

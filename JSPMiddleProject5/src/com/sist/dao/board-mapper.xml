@@ -42,13 +42,13 @@
  -->
  	<!--  (include | trim | where | set | foreach | choose | if | bind)*  -->
 	<select id="boardListData" resultType="BoardVO" parameterType="java.util.Map"> <!-- resultType어디에 값을 넣을거니(리턴형)  alias="BoardVO" parameterType ? 매개변수=> 2개 but 가지고 있지 않은 변수도 있어?==> Map에 저장해!!-->
-		SELECT no,subject,name,regdate,hit,num
+		SELECT no,subject,name,regdate,hit,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,num
 		FROM(SELECT no,subject,name,regdate,hit,rownum as num
 		FROM(SELECT no,subject,name,regdate,hit
 		FROM board ORDER BY no DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
-	
+	<!-- 위에 변수들은 vo에서 set처리가 모두 되었기 때문에 작동한다!! -->
 	<!--  public BoardVO boardDetailData(int no)
 	{		=> selectOne()	========> #{no} 일치시켜야함!
 				객체단위로 한개 받을때!
@@ -85,6 +85,7 @@
 		<selectKey keyProperty="no" resultType="int" order="BEFORE"> <!-- selectkey no처리먼저 아래처럼 nvl처리 해주고 insert처리해라!!  before준 이유는 selectkey를 실행하고 insert를 수행하라는 의미"order" -->
 		SELECT NVL(MAX(no)+1,1) as no FROM board 
 		</selectKey>
+		INSERT INTO board VALUES(#{no},#{name},#{subject},#{content},#{pwd},SYSDATE,0)
 	</insert>
 	<!-- 
 		alias? 명을 동일하게 맞춰줘야한다.
@@ -93,6 +94,15 @@
 		keyProperty="no"  ==동일 as no
 		rs.getInt(1) ==> rs.getInt("column명")
 	
+		INSERT INTO board VALUES(#{no},#{name},#{subject},#{content},#{pwd},SYSDATE,0)
+								  =no==> selectkey에서 no와 동일! == keyProperty="no"
+		
+		#{name} == vo.getName()
+		
+		#{no},#{name},#{subject},#{content},#{pwd}
+		컬럼명, 변수명으로 값을 보내고 받기때문에 인덱스를 신경쓸 필요x
+		
+		
 	 -->
 	
 	

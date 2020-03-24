@@ -235,4 +235,19 @@ public class BoardDAO {
 		return total;
 		
 	}
+	
+	
+	//insert 데이터 받아와서 넣어주기
+	public static void boardInsert(BoardVO vo)
+	{
+		SqlSession session=ssf.openSession(true); // or setAutoCommit(true)
+		session.insert("boardInsert",vo);
+		session.close();
+		
+		//boardmodel에서 불러들임 고고1!
+		
+		
+	}
+	
+	
 }
