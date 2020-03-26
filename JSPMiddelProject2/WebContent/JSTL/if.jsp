@@ -7,7 +7,7 @@
     
     	JSTL => XML로 제작됨! 
     	1. TAG 열고 닫기 항상 유의!
-    	2. 지원하는 속성외의 다른 속성을 이요하면 에러가 난다. (ex) var test value items....) 
+    	2. 지원하는 속성외의 다른 속성을 이용하면 에러가 난다. (ex) var test value items....) 
     	3. 속성값은 반드시 ""를 사용해야한다.
     	ex) <c:set var=i/> ->error=> "i"
     		
